@@ -1,0 +1,477 @@
+/* ==========================================================================
+   StudyPilot AI — iOS 26 Layout & Navigation Shell
+   ========================================================================== */
+
+/* ── Application Shell ──────────────────────────────────────────── */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-primary);
+}
+
+/* ── Floating Glass Sidebar ─────────────────────────────────────── */
+.app-sidebar {
+  width: var(--sidebar-width);
+  height: calc(100vh - 28px);
+  position: sticky;
+  top: 14px;
+  margin: 14px 0 14px 14px;
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-sidebar);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .app-sidebar {
+    background: #FFFFFF;
+  }
+}
+
+/* ── Sidebar Header ─────────────────────────────────────────────── */
+.sidebar-header {
+  padding: 20px 16px 16px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.sidebar-logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(140deg, #007AFF 0%, #5856D6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 122, 255, 0.30);
+  color: white;
+  flex-shrink: 0;
+}
+
+.sidebar-brand-title {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.sidebar-brand-sub {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+/* ── Navigation ─────────────────────────────────────────────────── */
+.sidebar-nav {
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-section-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 4px 12px 6px;
+  margin-top: 2px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition: all var(--transition-fast);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  background: none;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-link.active {
+  color: var(--accent-blue);
+  background: var(--accent-blue-subtle);
+  border-color: var(--accent-blue-border);
+  font-weight: 600;
+}
+
+.nav-link.active svg {
+  color: var(--accent-blue);
+}
+
+.nav-link-badge {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  padding: 1px 7px;
+}
+
+/* ── Sidebar Footer ─────────────────────────────────────────────── */
+.sidebar-footer {
+  padding: 12px 10px;
+  border-top: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.sidebar-health-card {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  border: 1.5px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+.sidebar-health-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-health-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sidebar-health-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* ── Main Content Workspace ─────────────────────────────────────── */
+.app-main {
+  flex: 1;
+  padding: 24px 28px 48px;
+  min-width: 0;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Page Headers ───────────────────────────────────────────────── */
+.page-header {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-title {
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 0.9375rem;
+  color: var(--text-tertiary);
+  margin-top: 3px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ── Responsive Grid Helpers ────────────────────────────────────── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* ── Dashboard Welcome Banner ───────────────────────────────────── */
+.welcome-banner {
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F0F7FF 100%);
+  border: 1.5px solid rgba(0, 122, 255, 0.12);
+  box-shadow: 0 4px 24px -4px rgba(0, 122, 255, 0.09), 0 1px 4px rgba(0, 0, 0, 0.02);
+  border-radius: var(--radius-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  pointer-events: none;
+}
+
+/* ── Stat Card ──────────────────────────────────────────────────── */
+.stat-card-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.stat-card-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.stat-card-sub {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ── Chat UI ─────────────────────────────────────────────────────── */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - 106px);
+  min-height: 480px;
+}
+
+.chat-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  min-height: 0;
+  background: #FFFFFF;
+  box-shadow: var(--glass-shadow);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+}
+
+.chat-context-strip {
+  padding: 9px 18px;
+  background: #F9FAFB;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+}
+
+.chat-input-bar {
+  padding: 12px 18px;
+  background: #FFFFFF;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+/* Chat bubbles */
+.chat-bubble-user {
+  padding: 11px 16px;
+  border-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-xs);
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  box-shadow: 0 2px 10px rgba(0, 122, 255, 0.28);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.chat-bubble-assistant {
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-xs);
+  background: #FFFFFF;
+  border: 1.5px solid var(--glass-border);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  box-shadow: var(--glass-shadow-sm);
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.chat-avatar-ai {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #007AFF, #5856D6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
+}
+
+.chat-avatar-user {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #E8E9EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Mobile Topbar ──────────────────────────────────────────────── */
+.mobile-topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-overlay);
+  width: 100%;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-topbar-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(140deg, #007AFF, #5856D6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.mobile-topbar-title {
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.mobile-menu-toggle {
+  color: var(--text-primary);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.mobile-menu-toggle:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ── Mobile Backdrop ────────────────────────────────────────────── */
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: calc(var(--z-sidebar) - 5);
+}
+
+/* ── Sticky Submit Bar (Quiz) ───────────────────────────────────── */
+.quiz-submit-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  position: sticky;
+  bottom: 14px;
+  z-index: var(--z-sticky);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  flex-wrap: wrap;
+  gap: 12px;
+}

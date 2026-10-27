@@ -1,0 +1,205 @@
+/* ==========================================================================
+   StudyPilot AI — Responsive Breakpoints
+   ========================================================================== */
+
+/* ── Large Desktop (> 1280px) ───────────────────────────────────── */
+@media (min-width: 1280px) {
+  .app-main {
+    padding: 28px 36px 56px;
+  }
+}
+
+/* ── Tablet (≤ 1024px) ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 230px;
+  }
+
+  .app-main {
+    padding: 20px 20px 40px;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .welcome-banner {
+    padding: 22px 24px;
+  }
+}
+
+/* ── Mobile (≤ 768px) ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Switch to vertical layout */
+  .app-container {
+    flex-direction: column;
+  }
+
+  /* Show mobile header */
+  .mobile-topbar {
+    display: flex;
+  }
+
+  /* Sidebar becomes an off-canvas drawer */
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh;
+    margin: 0;
+    width: 272px;
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+    transform: translateX(-100%);
+    box-shadow: 12px 0 40px rgba(0, 0, 0, 0.14);
+    transition: transform var(--transition-normal);
+    z-index: var(--z-sidebar);
+    background: #FFFFFF;
+  }
+
+  .app-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* Show backdrop when menu open */
+  .mobile-backdrop.open {
+    display: block;
+  }
+
+  /* Tighter main content */
+  .app-main {
+    padding: 14px 14px 40px;
+    max-width: 100%;
+  }
+
+  /* Typography scaling */
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.875rem;
+  }
+
+  /* Grid collapses */
+  .grid-4,
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Modal fits mobile */
+  .glass-modal-content {
+    margin: 8px;
+    max-height: 95dvh;
+    border-radius: var(--radius-xl);
+  }
+
+  /* Welcome banner */
+  .welcome-banner {
+    padding: 18px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Chat layout */
+  .chat-container {
+    height: calc(100dvh - 130px);
+    min-height: 300px;
+    gap: 12px;
+  }
+
+  .chat-messages {
+    padding: 14px 14px;
+    gap: 14px;
+  }
+
+  .chat-input-bar {
+    padding: 10px 14px;
+  }
+
+  /* Notes two-column collapses to one */
+  .notes-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Quiz submit bar */
+  .quiz-submit-bar {
+    padding: 12px 16px;
+    bottom: 8px;
+  }
+
+  /* Stat values slightly smaller */
+  .stat-card-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* ── Very Small Mobile (≤ 480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+  .app-main {
+    padding: 12px 12px 36px;
+  }
+
+  .glass-btn {
+    font-size: 0.875rem;
+    padding: 8px 14px;
+  }
+
+  .chat-messages {
+    padding: 12px;
+  }
+
+  .stat-card-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── High-DPI / Retina ──────────────────────────────────────────── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .app-sidebar {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ── Print ──────────────────────────────────────────────────────── */
+@media print {
+  .app-sidebar,
+  .mobile-topbar,
+  .mobile-backdrop,
+  .glass-btn,
+  .quiz-submit-bar {
+    display: none !important;
+  }
+
+  .app-main {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .glass-card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    background: #fff;
+  }
+}
+
+/* ── Safe Area (Notch / Home Bar) ───────────────────────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .chat-input-bar {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .quiz-submit-bar {
+    bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+
+  .app-sidebar {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

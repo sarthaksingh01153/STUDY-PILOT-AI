@@ -1,0 +1,550 @@
+/* ==========================================================================
+   StudyPilot AI — iOS 26 Liquid Glass Components
+   Premium glass surfaces, micro-interactions, and accessible controls
+   ========================================================================== */
+
+/* ── Glass Card ─────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--glass-surface-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  will-change: transform;
+}
+
+/* Specular top-edge highlight */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.85),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card {
+    background: #FFFFFF;
+  }
+}
+
+.glass-card-interactive {
+  cursor: pointer;
+}
+
+.glass-card-interactive:hover {
+  transform: translateY(-1.5px);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-lg), var(--glass-highlight);
+}
+
+.glass-card-interactive:active {
+  transform: translateY(0);
+}
+
+/* Colored glow variants */
+.glass-card-glow-indigo {
+  box-shadow:
+    0 4px 20px -2px rgba(88, 86, 214, 0.10),
+    0 1px 3px rgba(0, 0, 0, 0.02),
+    var(--glass-highlight);
+  border-color: rgba(88, 86, 214, 0.18);
+}
+
+.glass-card-glow-rose {
+  box-shadow:
+    0 4px 20px -2px rgba(255, 59, 48, 0.10),
+    0 1px 3px rgba(0, 0, 0, 0.02),
+    var(--glass-highlight);
+  border-color: rgba(255, 59, 48, 0.22);
+}
+
+.glass-card-glow-emerald {
+  box-shadow:
+    0 4px 20px -2px rgba(52, 199, 89, 0.10),
+    0 1px 3px rgba(0, 0, 0, 0.02),
+    var(--glass-highlight);
+  border-color: rgba(52, 199, 89, 0.22);
+}
+
+/* ── Glass Buttons ──────────────────────────────────────────────── */
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9375rem; /* 15px — readable minimum */
+  line-height: 1.2;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  letter-spacing: -0.01em;
+  min-height: 38px; /* Accessible touch target */
+}
+
+.glass-btn:focus-visible {
+  outline: 2.5px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.glass-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Primary — Apple Blue */
+.glass-btn-primary {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  box-shadow:
+    0 1px 4px rgba(0, 122, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.glass-btn-primary:not(:disabled):hover {
+  background: var(--accent-blue-hover);
+  box-shadow:
+    0 3px 10px rgba(0, 122, 255, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transform: translateY(-0.5px);
+}
+
+.glass-btn-primary:not(:disabled):active {
+  background: #004FC7;
+  transform: translateY(0.5px);
+  box-shadow: 0 1px 3px rgba(0, 122, 255, 0.22);
+}
+
+/* Secondary — White Glass */
+.glass-btn-secondary {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.glass-btn-secondary:not(:disabled):hover {
+  background: #F8F9FA;
+  border-color: var(--glass-border-hover);
+  transform: translateY(-0.5px);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.glass-btn-secondary:not(:disabled):active {
+  background: #F0F1F3;
+  transform: translateY(0.5px);
+}
+
+/* Danger */
+.glass-btn-danger {
+  background: var(--color-error-subtle);
+  color: var(--color-error);
+  border: 1px solid var(--color-error-border);
+}
+
+.glass-btn-danger:not(:disabled):hover {
+  background: #fecaca;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+/* Ghost */
+.glass-btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+.glass-btn-ghost:not(:disabled):hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+  border-color: var(--glass-border);
+}
+
+/* ── Inputs, Textareas, Selects ─────────────────────────────────── */
+.glass-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.glass-label {
+  font-size: 0.8125rem; /* 13px — still readable label */
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.glass-input,
+.glass-textarea,
+.glass-select {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem; /* 15px — readable input text */
+  line-height: 1.5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), inset 0 1px 2px rgba(0, 0, 0, 0.01);
+  transition: all var(--transition-fast);
+  min-height: 42px; /* Accessible tap target */
+}
+
+.glass-input:hover,
+.glass-textarea:hover,
+.glass-select:hover {
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+.glass-input:focus,
+.glass-textarea:focus,
+.glass-select:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  background: #FFFFFF;
+  box-shadow:
+    0 0 0 3.5px rgba(0, 122, 255, 0.16),
+    0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.glass-input::placeholder,
+.glass-textarea::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.glass-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B6F76' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.glass-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ── Badges & Chips ─────────────────────────────────────────────── */
+.glass-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem; /* 12px — acceptable for badges */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.glass-badge-indigo,
+.glass-badge-blue {
+  background: var(--accent-blue-subtle);
+  color: #004FC7;
+  border-color: var(--accent-blue-border);
+}
+
+.glass-badge-emerald {
+  background: var(--color-success-subtle);
+  color: #166534;
+  border-color: var(--color-success-border);
+}
+
+.glass-badge-rose {
+  background: var(--color-error-subtle);
+  color: #991B1B;
+  border-color: var(--color-error-border);
+}
+
+.glass-badge-amber {
+  background: var(--color-warning-subtle);
+  color: #92400E;
+  border-color: var(--color-warning-border);
+}
+
+/* ── Modal Window ───────────────────────────────────────────────── */
+.glass-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  backdrop-filter: blur(8px) saturate(130%);
+  -webkit-backdrop-filter: blur(8px) saturate(130%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  padding: 20px;
+  animation: modalFadeIn 160ms ease-out;
+}
+
+.glass-modal-content {
+  background: var(--glass-surface-modal);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow-lg), var(--glass-highlight);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalScaleUp 200ms var(--ease-spring);
+}
+
+/* ── Status Indicators ──────────────────────────────────────────── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: #FFFFFF;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+  color: var(--text-primary);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.online {
+  background: var(--accent-emerald);
+  box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.25);
+  animation: pulse-dot 2s infinite;
+}
+
+.status-dot.warning {
+  background: var(--accent-amber);
+  box-shadow: 0 0 0 2px rgba(255, 149, 0, 0.25);
+}
+
+.status-dot.offline {
+  background: var(--accent-rose);
+  box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.25);
+}
+
+/* ── Progress Bars ──────────────────────────────────────────────── */
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 400ms var(--ease-spring);
+}
+
+.progress-fill-blue {
+  background: linear-gradient(90deg, var(--accent-blue), #33A3FF);
+}
+
+.progress-fill-emerald {
+  background: linear-gradient(90deg, var(--accent-emerald-dark), var(--accent-emerald));
+}
+
+.progress-fill-rose {
+  background: linear-gradient(90deg, var(--accent-rose-hover), var(--accent-rose));
+}
+
+.progress-fill-gradient {
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-emerald));
+}
+
+/* ── Code Blocks ────────────────────────────────────────────────── */
+.code-block {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #1A1E2E;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  margin: 4px 0;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  background: #111520;
+  color: #8892A8;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.code-block-body {
+  padding: 14px 16px;
+  margin: 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #E8EDF5;
+  tab-size: 2;
+}
+
+.code-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #8892A8;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+}
+
+.code-copy-btn:hover {
+  color: #CBD5E1;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Inline Code ────────────────────────────────────────────────── */
+.inline-code {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1.5px 5px;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: var(--font-mono);
+  color: var(--accent-blue);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ── Loading Spinner Utility ────────────────────────────────────── */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 200ms var(--ease-spring) both;
+}
+
+/* ── Divider ────────────────────────────────────────────────────── */
+.glass-divider {
+  height: 1px;
+  background: var(--glass-border);
+  border: none;
+  margin: 0;
+}
+
+/* ── Note Card Mini ─────────────────────────────────────────────── */
+.note-card-mini {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  border: 1.5px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.note-card-mini:hover {
+  border-color: var(--accent-blue-border);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Chip / Prompt Button ───────────────────────────────────────── */
+.prompt-chip {
+  font-size: 0.875rem;
+  padding: 6px 13px;
+  border-radius: var(--radius-full);
+  background: #F2F2F7;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--glass-border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.prompt-chip:hover {
+  background: #E8E8EE;
+  color: var(--text-primary);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* ── Question Count Picker ──────────────────────────────────────── */
+.count-pill {
+  padding: 9px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  border: 1.5px solid var(--glass-border);
+  background: #FFFFFF;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  font-family: var(--font-sans);
+}
+
+.count-pill:hover {
+  border-color: var(--accent-blue-border);
+  color: var(--text-primary);
+}
+
+.count-pill.active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.30);
+}
